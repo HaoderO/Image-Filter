@@ -118,7 +118,6 @@ end
 //------------------------------------------------
 // 计算和数
 always @(posedge clk or negedge rst_n)
-begin
     if(!rst_n) begin    //复位信号
         sequence_sorted_temp <= 0;
     end
@@ -141,12 +140,10 @@ begin
     end
     else
         sequence_sorted_temp <= sequence_sorted_temp;
-end
 
 //------------------------------------------------
 // 计算排序后的原始序号
 always @(posedge clk or negedge rst_n)
-begin
     if(!rst_n)
         sequence_sorted <= 0;
     else if(FSM_state_sort == Convert)
@@ -155,6 +152,5 @@ begin
         end 
     else
         sequence_sorted <= sequence_sorted;
-end
     
 endmodule

@@ -63,33 +63,21 @@ end
 //------------------------------------------------
 // 排序计数器
 always @(posedge clk or negedge rst_n)
-begin
-    if(!rst_n)
-        cnt_sort <= 0;
-    else if(FSM_state_sort == Initial)
-        cnt_sort <= 0;
-    else if(FSM_state_sort == Sort)
-        cnt_sort <= cnt_sort + 1'b1;
-    else
-        cnt_sort <= cnt_sort;
-end
+
 
 //------------------------------------------------
 // 排序结束信号
 always @(posedge clk or negedge rst_n)
-begin
     if(!rst_n)
         sort_finish <= 1'b0;
     else if(cnt_sort == 1'b1)
         sort_finish <= 1'b1;
     else
         sort_finish <= 1'b0;
-end
     
 //------------------------------------------------
 // 并行比较
 always @(posedge clk or negedge rst_n)
-begin
     if(!rst_n) begin    //复位信号
         for(i=0;i<DN;i=i+1) begin 
             temp[i] = 0;
@@ -113,12 +101,10 @@ begin
             end
         end
     end
-end
 
 //------------------------------------------------
 // 计算和数
 always @(posedge clk or negedge rst_n)
-begin
     if(!rst_n) begin    //复位信号
         sequence_sorted_temp <= 0;
     end
@@ -141,12 +127,10 @@ begin
     end
     else
         sequence_sorted_temp <= sequence_sorted_temp;
-end
 
 //------------------------------------------------
 // 计算排序后的原始序号
 always @(posedge clk or negedge rst_n)
-begin
     if(!rst_n)
         sequence_sorted <= 0;
     else if(FSM_state_sort == Convert)
@@ -155,6 +139,5 @@ begin
         end 
     else
         sequence_sorted <= sequence_sorted;
-end
     
 endmodule

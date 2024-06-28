@@ -89,36 +89,11 @@ end
 //------------------------------------------------
 // 并行比较
 always @(posedge clk or negedge rst_n)
-begin
-    if(!rst_n) begin    //复位信号
-        for(i=0;i<DN;i=i+1) begin 
-            temp[i] = 0;
-        end
-    end
-    else if(sort_sig) begin    //排序开始信号
-        for(i=0;i<DN;i=i+1) begin
-            for(j=0;j<DN;j=j+1) begin
-                if(i>j) begin
-                    if(data_unsort[i*DW+:DW]>=data_unsort[j*DW+:DW]) 
-                        temp[i][j] <= 1;
-                    else    
-                        temp[i][j] <= 0;
-                end
-                else begin
-                    if(data_unsort[i*DW+:DW]>data_unsort[j*DW+:DW])
-                        temp[i][j] <= 1;
-                    else
-                        temp[i][j] <= 0;
-                end
-            end
-        end
-    end
-end
+beg
 
 //------------------------------------------------
 // 计算和数
 always @(posedge clk or negedge rst_n)
-begin
     if(!rst_n) begin    //复位信号
         sequence_sorted_temp <= 0;
     end
@@ -141,12 +116,10 @@ begin
     end
     else
         sequence_sorted_temp <= sequence_sorted_temp;
-end
 
 //------------------------------------------------
 // 计算排序后的原始序号
 always @(posedge clk or negedge rst_n)
-begin
     if(!rst_n)
         sequence_sorted <= 0;
     else if(FSM_state_sort == Convert)
@@ -155,6 +128,5 @@ begin
         end 
     else
         sequence_sorted <= sequence_sorted;
-end
     
 endmodule

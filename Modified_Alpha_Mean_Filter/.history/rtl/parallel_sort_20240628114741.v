@@ -148,13 +148,13 @@ end
 always @(posedge clk or negedge rst_n)
 begin
     if(!rst_n)
-        sequence_sorted <= 0;
-    else if(FSM_state_sort == Convert)
-        for(i=0;i<DN;i=i+1) begin
-            sequence_sorted[sequence_sorted_temp[i*DW_sequence+:DW_sequence]*DW_sequence+:DW_sequence] <= i; 
-        end 
-    else
-        sequence_sorted <= sequence_sorted;
+    sequence_sorted <= 0;
+else if(FSM_state_sort == Convert)
+    for(i=0;i<DN;i=i+1) begin
+        sequence_sorted[sequence_sorted_temp[i*DW_sequence+:DW_sequence]*DW_sequence+:DW_sequence] <= i; 
+    end 
+else
+    sequence_sorted <= sequence_sorted;
 end
     
 endmodule

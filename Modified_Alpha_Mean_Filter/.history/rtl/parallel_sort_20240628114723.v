@@ -118,35 +118,11 @@ end
 //------------------------------------------------
 // 计算和数
 always @(posedge clk or negedge rst_n)
-begin
-    if(!rst_n) begin    //复位信号
-        sequence_sorted_temp <= 0;
-    end
-    else if((FSM_state_sort == Sort) && (cnt_sort == 1'd0)) begin    //序列初始化
-        for(i=0;i<DN;i=i+1) begin
-            sequence_sorted_temp[i*DW_sequence+:DW_sequence] <= i;
-        end
-    end
-    else if(cnt_sort == 1'd1) begin //更新序列
-        for(i=0;i<DN;i=i+1) begin
-            sequence_sorted_temp[i*DW_sequence+:DW_sequence] 
-            <= temp[i][0] +temp[i][1] +temp[i][2] +temp[i][3]
-              +temp[i][4] +temp[i][5] +temp[i][6] +temp[i][7]
-              +temp[i][8] +temp[i][9] +temp[i][10]+temp[i][11]
-              +temp[i][12]+temp[i][13]+temp[i][14]+temp[i][15]
-              +temp[i][16]+temp[i][17]+temp[i][18]+temp[i][19]
-              +temp[i][20]+temp[i][21]+temp[i][22]+temp[i][23]
-              +temp[i][24]; 
-        end
-    end
-    else
-        sequence_sorted_temp <= sequence_sorted_temp;
-end
+
 
 //------------------------------------------------
 // 计算排序后的原始序号
 always @(posedge clk or negedge rst_n)
-begin
     if(!rst_n)
         sequence_sorted <= 0;
     else if(FSM_state_sort == Convert)
@@ -155,6 +131,5 @@ begin
         end 
     else
         sequence_sorted <= sequence_sorted;
-end
     
 endmodule
