@@ -137,7 +137,7 @@ begin
               +temp[i][12]+temp[i][13]+temp[i][14]+temp[i][15]
               +temp[i][16]+temp[i][17]+temp[i][18]+temp[i][19]
               +temp[i][20]+temp[i][21]+temp[i][22]+temp[i][23]
-              +temp[i][24]; // 修改待排序的数据个数时，需要修改此段
+              +temp[i][24]; // 修改待排序的数据个数shi
         end
     end
     else
